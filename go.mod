@@ -1,3 +1,3 @@
-module github.com/silentsokolov/go-vimeo
+module github.com/ezaurum/go-vimeo
 
-go 1.16
+go 1.19
