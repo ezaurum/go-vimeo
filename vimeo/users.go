@@ -316,6 +316,23 @@ func (s *UsersService) Feed(uid string, opt ...CallOption) ([]*Feed, *Response, 
 // Passing the empty string will edit authenticated user.
 //
 // Vimeo API docs: https://developer.vimeo.com/api/reference/users#get_followers
+func (s *UsersService) ListFolders(uid string, opt ...CallOption) ([]*Folder, *Response, error) {
+	var u string
+	if uid == "" {
+		u = "me/folders"
+	} else {
+		u = fmt.Sprintf("users/%s/followers", uid)
+	}
+
+	folders, resp, err := listFolder(s.client, u, opt...)
+
+	return folders, resp, err
+}
+
+// ListFollower method returns all the followers of the authenticated user.
+// Passing the empty string will edit authenticated user.
+//
+// Vimeo API docs: https://developer.vimeo.com/api/reference/users#get_followers
 func (s *UsersService) ListFollower(uid string, opt ...CallOption) ([]*User, *Response, error) {
 	var u string
 	if uid == "" {
