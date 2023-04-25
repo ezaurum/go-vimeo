@@ -25,8 +25,6 @@ type Folder struct {
 	TopLevel              bool      `json:"top_level"`
 	Pictures              *Pictures `json:"pictures,omitempty"`
 	LastVideoFeaturedTime string    `json:"last_video_featured_time,omitempty"`
-	Parent                *Folder   `json:"parent,omitempty"`
-	SubFolders            []*Folder `json:"subfolders,omitempty"`
 	ResourceKey           string    `json:"resource_key,omitempty"`
 	MetaData              *MetaData `json:"metadata,omitempty"`
 }
@@ -42,9 +40,14 @@ type Interactions struct {
 	Like       *Interaction `json:"like,omitempty"`
 }
 
+type Connections struct {
+	ParentFolder *Folder `json:"parent_folder,omitempty"`
+	AncestorPath *Folder `json:"ancestor_path,omitempty"`
+}
+
 type MetaData struct {
 	Interactions *Interactions `json:"interactions,omitempty"`
-	ParentFolder *Folder       `json:"parent_folder,omitempty"`
+	Connections  *Connections  `json:"connections,omitempty"`
 }
 
 func listFolder(c *Client, url string, opt ...CallOption) ([]*Folder, *Response, error) {
