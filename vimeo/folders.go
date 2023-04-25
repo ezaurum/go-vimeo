@@ -41,8 +41,8 @@ type Interactions struct {
 }
 
 type Connections struct {
-	ParentFolder *Folder `json:"parent_folder,omitempty"`
-	AncestorPath *Folder `json:"ancestor_path,omitempty"`
+	ParentFolder *Folder  `json:"parent_folder,omitempty"`
+	AncestorPath []Folder `json:"ancestor_path,omitempty"`
 }
 
 type MetaData struct {
