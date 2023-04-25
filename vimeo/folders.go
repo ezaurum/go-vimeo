@@ -122,3 +122,13 @@ func (s *FoldersService) ListVideo(cat string, opt ...CallOption) ([]*Video, *Re
 
 	return videos, resp, err
 }
+
+// Get method gets a single category.
+//
+// Vimeo API docs: https://developer.vimeo.com/api/reference/folders#get_category
+func (s *FoldersService) GetVideos(cat string, opt ...CallOption) ([]*Video, *Response, error) {
+	u := fmt.Sprintf("folders/%s/videos", cat)
+	category, resp, err := listVideo(s.client, u, opt...)
+
+	return category, resp, err
+}
