@@ -18,23 +18,33 @@ type dataListFolder struct {
 
 // Folder represents a category.
 type Folder struct {
-	CreatedTime           time.Time    `json:"created_time"`
-	URI                   string       `json:"uri,omitempty"`
-	Link                  string       `json:"link,omitempty"`
-	Name                  string       `json:"name,omitempty"`
-	TopLevel              bool         `json:"top_level"`
-	Pictures              *Pictures    `json:"pictures,omitempty"`
-	LastVideoFeaturedTime string       `json:"last_video_featured_time,omitempty"`
-	Parent                *SubFolder   `json:"parent,omitempty"`
-	SubFolders            []*SubFolder `json:"subfolders,omitempty"`
-	ResourceKey           string       `json:"resource_key,omitempty"`
+	CreatedTime           time.Time `json:"created_time"`
+	URI                   string    `json:"uri,omitempty"`
+	Link                  string    `json:"link,omitempty"`
+	Name                  string    `json:"name,omitempty"`
+	TopLevel              bool      `json:"top_level"`
+	Pictures              *Pictures `json:"pictures,omitempty"`
+	LastVideoFeaturedTime string    `json:"last_video_featured_time,omitempty"`
+	Parent                *Folder   `json:"parent,omitempty"`
+	SubFolders            []*Folder `json:"subfolders,omitempty"`
+	ResourceKey           string    `json:"resource_key,omitempty"`
+	MetaData              *MetaData `json:"metadata,omitempty"`
 }
 
-// SubFolder internal object provides access to subcategory in category.
-type SubFolder struct {
+type Interaction struct {
 	URI  string `json:"URI,omitempty"`
 	Name string `json:"name,omitempty"`
 	Link string `json:"link,omitempty"`
+}
+
+type Interactions struct {
+	WatchLater *Interaction `json:"watchlater,omitempty"`
+	Like       *Interaction `json:"like,omitempty"`
+}
+
+type MetaData struct {
+	Interactions *Interactions `json:"interactions,omitempty"`
+	ParentFolder *Folder       `json:"parent_folder,omitempty"`
 }
 
 func listFolder(c *Client, url string, opt ...CallOption) ([]*Folder, *Response, error) {
